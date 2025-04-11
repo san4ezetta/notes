@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#4CAF50">
+    <title>Заметки</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Заметки</h1>
+            <div id="status-indicator" class="online">Онлайн</div>
+        </header>
+        
+        <div class="note-input-container">
+            <textarea id="note-input" placeholder="Напишите заметку..."></textarea>
+            <button id="add-note-btn">Добавить</button>
+        </div>
+        
+        <div class="notes-container">
+            <h2>Ваши заметки</h2>
+            <div id="notes-list"></div>
+        </div>
+    </div>
+
+    <div id="note-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Просмотр заметки</h2>
+            <textarea id="edit-note-input"></textarea>
+            <div class="modal-buttons">
+                <button id="save-note-btn">Сохранить</button>
+                <button id="cancel-edit-btn">Отмена</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Регистрация Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(registration => {
+                        console.log('ServiceWorker зарегистрирован: ', registration.scope);
+                    })
+                    .catch(error => {
+                        console.log('Ошибка регистрации ServiceWorker: ', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
